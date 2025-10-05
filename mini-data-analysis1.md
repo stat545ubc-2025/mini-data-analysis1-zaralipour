@@ -1,4 +1,4 @@
-Mini Data Analysis 1
+Mini Data Analysis 1 - Zahra Alipour
 ================
 Zahra Alipour
 

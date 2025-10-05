@@ -1,5 +1,5 @@
 ---
-title: "Mini Data Analysis 1"
+title: "Mini Data Analysis 1 - Zahra Alipour"
 author: "Zahra Alipour"
 output: github_document
 ---
