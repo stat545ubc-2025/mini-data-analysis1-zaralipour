@@ -1,0 +1,229 @@
+---
+title: "Mini Data Analysis 1"
+author: "Zahra Alipour"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+library(datateachr)
+library(tidyverse)
+library(glue)
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(fig.width = 7, fig.height = 4.5)
+
+# Make diagnosis a factor with proper ordering
+cancer_sample <- cancer_sample %>%
+  mutate(diagnosis = factor(diagnosis, levels = c("B", "M")))
+```
+
+# Task 1: Choose and explore 4 datasets from datateachr
+
+In this task, I will explore 4 datasets from the `datateachr` package to understand their structure and choose one for further analysis.
+
+## Exploring the datasets
+
+I examined the available datasets and explored their basic structure:
+
+```{r explore-datasets}
+# Check what datasets are available in datateachr
+data(package = "datateachr")
+
+# Explore apt_buildings
+glimpse(apt_buildings)
+nrow(apt_buildings)
+ncol(apt_buildings)
+summary(apt_buildings)
+```
+
+```{r explore-building-permits}
+# Explore building_permits
+glimpse(building_permits)
+nrow(building_permits)
+ncol(building_permits)
+summary(building_permits)
+```
+
+```{r explore-cancer-sample}
+# Explore cancer_sample
+glimpse(cancer_sample)
+nrow(cancer_sample)
+ncol(cancer_sample)
+summary(cancer_sample)
+```
+
+```{r explore-steam-games}
+# Explore steam_games
+glimpse(steam_games)
+nrow(steam_games)
+ncol(steam_games)
+summary(steam_games)
+```
+
+
+## Dataset Choice and Justification
+
+After exploring these datasets, I chose the **cancer_sample** dataset for the following reasons:
+
+1. **Manageable size**: With 569 observations and 32 variables, it's a good size for analysis
+2. **Clear structure**: It has a mix of numerical and categorical variables that will allow for diverse exploration
+3. **Medical relevance**: Cancer research is important and the dataset appears to contain diagnostic measurements
+4. **Good for visualization**: The numerical variables will work well with ggplot2 for creating meaningful plots
+
+## Initial Research Question
+
+**How do the various diagnostic measurements (radius, texture, perimeter, etc.) differ between malignant and benign cancer samples?**
+
+# Task 2: Perform 4 exploration exercises
+
+I performed 4 different exploration exercises on the `cancer_sample` dataset using dplyr and ggplot2.
+
+## Exercise 1: Distribution of diagnosis (target variable)
+
+I first examined the distribution of the diagnosis variable to understand the balance of malignant vs benign cases.
+
+```{r exercise1-diagnosis-distribution}
+# Get counts and proportions
+cs_counts <- count(cancer_sample, diagnosis) |> mutate(prop = round(n/sum(n),3))
+cs_counts
+# Check the distribution of diagnosis
+cancer_sample %>%
+  count(diagnosis) %>%
+  mutate(proportion = n / sum(n))
+
+# Create a bar plot of diagnosis distribution
+ggplot(cancer_sample, aes(x = diagnosis, fill = diagnosis)) +
+  geom_bar(alpha = 0.7) +
+  labs(title = "Distribution of Cancer Diagnosis",
+       x = "Diagnosis",
+       y = "Count",
+       fill = "Diagnosis") +
+  theme_minimal() +
+  scale_fill_manual(values = c("M" = "#d62728", "B" = "#2ca02c"))
+```
+
+**Explanation**: The plot shows the distribution of malignant (M) vs benign (B) cancer diagnoses. This helps us understand the class balance in our dataset, which is important for any subsequent analysis.
+
+## Exercise 2: Missing value analysis
+
+I checked for missing values across all variables in the dataset.
+
+```{r exercise2-missing-values, message=FALSE, warning=FALSE}
+# Use naniar if available; otherwise do base/tidyverse version
+has_naniar <- requireNamespace("naniar", quietly = TRUE)
+
+# Check for missing values using modern dplyr approach
+missing_summary <- cancer_sample %>%
+  summarise(across(everything(), ~ sum(is.na(.)), .names = "{.col}")) %>%
+  tidyr::pivot_longer(everything(), names_to = "variable", values_to = "missing_count") %>%
+  arrange(desc(missing_count))
+
+# Display missing value summary
+missing_summary
+
+# Show total missing values
+total_missing <- sum(missing_summary$missing_count)
+cat("Total missing values in the dataset:", total_missing, "\n")
+
+# Use naniar's professional missing data visualization if available
+if (has_naniar) {
+  naniar::vis_miss(cancer_sample, warn_large_data = FALSE)
+  naniar::gg_miss_var(cancer_sample)
+}
+```
+
+**Explanation**: This analysis shows that the cancer_sample dataset has no missing values across any of its 32 variables. This is excellent for analysis, as we won't need to decide how to handle missing data or worry about incomplete observations affecting our results.
+
+## Exercise 3: Filtering and summary statistics
+
+I filtered the data to compare malignant vs benign cases for a specific measurement (radius_mean).
+
+```{r exercise3-filtering-summary}
+# Filter and compare radius_mean between malignant and benign
+radius_comparison <- cancer_sample %>%
+  group_by(diagnosis) %>%
+  summarise(
+    count = n(),
+    mean_radius = mean(radius_mean),
+    median_radius = median(radius_mean),
+    sd_radius = sd(radius_mean),
+    min_radius = min(radius_mean),
+    max_radius = max(radius_mean)
+  )
+
+# Display the comparison
+radius_comparison
+
+# Inline statistics for clarity
+glue("Mean radius (Benign) = {round(radius_comparison$mean_radius[radius_comparison$diagnosis=='B'],2)}, ",
+     "Mean radius (Malignant) = {round(radius_comparison$mean_radius[radius_comparison$diagnosis=='M'],2)}")
+
+# Create a box plot to visualize the distribution
+ggplot(cancer_sample, aes(x = diagnosis, y = radius_mean, fill = diagnosis)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "Radius Mean by Diagnosis",
+       x = "Diagnosis",
+       y = "Radius Mean",
+       fill = "Diagnosis") +
+  theme_minimal() +
+  scale_fill_manual(values = c("M" = "#d62728", "B" = "#2ca02c"))
+```
+
+**Explanation**: This filtering exercise shows that malignant tumors tend to have larger mean radius values than benign tumors. The box plot clearly visualizes this difference, with malignant cases showing higher median and spread of radius measurements.
+
+## Exercise 4: Relationship between variables
+
+I explored the relationship between two key measurements: radius_mean and texture_mean.
+
+```{r exercise4-relationships}
+# Create a scatter plot showing relationship between radius_mean and texture_mean
+ggplot(cancer_sample, aes(x = radius_mean, y = texture_mean, color = diagnosis)) +
+  geom_point(alpha = 0.6, size = 2) +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Relationship between Radius Mean and Texture Mean",
+       x = "Radius Mean",
+       y = "Texture Mean",
+       color = "Diagnosis") +
+  theme_minimal() +
+  scale_color_manual(values = c("M" = "#d62728", "B" = "#2ca02c"))
+
+# Calculate correlation coefficient
+correlation <- cancer_sample %>%
+  select(radius_mean, texture_mean) %>%
+  cor(use = "complete.obs")
+
+correlation[1,2]
+```
+
+**Explanation**: This scatter plot reveals the relationship between radius and texture measurements, colored by diagnosis. The plot shows that malignant and benign cases cluster differently in this two-dimensional space, suggesting these variables could be useful predictors for classification.
+
+# Task 3: Research questions for Milestone 2
+
+Based on my exploration of the `cancer_sample` dataset, here are 4 research questions I plan to explore further in Milestone 2:
+
+## Research Question 1
+**How well can we predict cancer diagnosis using only the "mean" measurements (radius_mean, texture_mean, perimeter_mean, etc.)?**
+
+This question focuses on using machine learning techniques to build a predictive model using the most fundamental measurements.
+
+## Research Question 2
+**Which combination of diagnostic measurements provides the best predictive power for distinguishing between malignant and benign tumors?**
+
+This involves feature selection and comparing different combinations of variables to find the optimal set for prediction.
+
+## Research Question 3
+**Are there significant differences in the variability (standard deviation) of measurements between malignant and benign cases?**
+
+This explores whether malignant tumors are not just larger but also more irregular/variable in their measurements.
+
+## Research Question 4
+**Can we identify distinct clusters or subgroups within malignant and benign cases based on their diagnostic measurements?**
+
+This question uses clustering techniques to discover if there are subtypes within each diagnosis category.
+
+---
+
+*This completes Mini Data Analysis 1. I believe this analysis provides a solid foundation for more advanced statistical techniques in Milestone 2.*
+
+```{r session-info}
+sessionInfo()
+```
