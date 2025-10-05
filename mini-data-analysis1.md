@@ -2,6 +2,10 @@ Mini Data Analysis 1
 ================
 Zahra Alipour
 
+**STAT 545A: Mini Data Analysis Deliverable 1**  
+**Student: Zahra Alipour**  
+**Date: December 2024**
+
 # Task 1: Choose and explore 4 datasets from datateachr
 
 In this task, I will explore 4 datasets from the `datateachr` package to

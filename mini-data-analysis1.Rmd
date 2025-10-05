@@ -4,6 +4,10 @@ author: "Zahra Alipour"
 output: github_document
 ---
 
+**STAT 545A: Mini Data Analysis Deliverable 1**  
+**Student: Zahra Alipour**  
+**Date: December 2024**
+
 ```{r setup, include=FALSE}
 library(datateachr)
 library(tidyverse)
