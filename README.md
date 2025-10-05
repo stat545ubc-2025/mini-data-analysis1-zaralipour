@@ -73,4 +73,4 @@ This repository contains the complete Milestone 1 submission for STAT 545A Mini 
 
 ---
 
-*For questions or issues, please refer to the course materials or contact the instructor.*
+*For questions or issues, please contact me at: zaralipour@gmail.com*
