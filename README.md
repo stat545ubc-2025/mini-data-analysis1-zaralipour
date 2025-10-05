@@ -46,17 +46,17 @@ Developed 4 research questions focusing on:
 
 ## Technical Features
 
-- **Modern R Practices**: Uses latest `dplyr` and `tidyr` functions
-- **Professional Visualizations**: Incorporates `naniar` package for missing data analysis
-- **Reproducible Analysis**: Includes `sessionInfo()` for complete reproducibility
-- **Clean Code**: Well-documented with clear explanations for each analysis step
+- Uses modern `dplyr` and `tidyr` functions for data manipulation
+- Includes `naniar` package for missing data analysis
+- Contains `sessionInfo()` for reproducibility
+- Well-documented code with explanations for each analysis step
 
-## How to Engage with This Repository
+## How to Use This Repository
 
-1. **View the Analysis**: Open `mini-data-analysis1.md` to see the complete knitted output
-2. **Run the Code**: Use `mini-data-analysis1.Rmd` in RStudio to reproduce the analysis
-3. **Review Plots**: Check the `mini-data-analysis1_files/figure-gfm/` directory for all visualizations
-4. **Check Reproducibility**: All code runs without errors and produces consistent results
+1. Open `mini-data-analysis1.md` to see the complete analysis output
+2. Use `mini-data-analysis1.Rmd` in RStudio to run the code yourself
+3. Check the `mini-data-analysis1_files/figure-gfm/` directory for all plots
+4. All code should run without errors
 
 ## Dependencies
 
