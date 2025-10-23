@@ -3,7 +3,7 @@
 **Student:** Zahra Alipour  
 **Course:** STAT 545A - Exploratory Data Analysis  
 **Institution:** University of British Columbia  
-**Date:** December 2024
+**Date:** December 2025
 
 ## Overview
 
@@ -14,8 +14,10 @@ This repository contains my Mini Data Analysis Project for STAT 545A, including 
 ### Main Files
 - `mini-data-analysis1.Rmd` - Milestone 1 source R Markdown document
 - `mini-data-analysis1.md` - Milestone 1 knitted GitHub document output
-- `mini-data-analysis2.Rmd` - Milestone 2 source R Markdown document
+- `mini-data-analysis2.Rmd` - Milestone 2 source R Markdown document (instructor template)
+- `mini-data-analysis2.md` - Milestone 2 knitted GitHub document output
 - `mini-data-analysis1_files/` - Directory containing all generated plots from Milestone 1
+- `output/` - Directory containing CSV and RDS files from Milestone 2
 
 ### Generated Plots
 - `exercise1-diagnosis-distribution-1.png` - Distribution of cancer diagnosis
@@ -34,10 +36,11 @@ This repository contains my Mini Data Analysis Project for STAT 545A, including 
 
 ### Milestone 2: Statistical Analysis and Machine Learning
 - **Research Questions**: 4 comprehensive questions addressing prediction, feature selection, variability, and clustering
-- **Data Wrangling**: Data exploration, tidying, and cleaning decisions
+- **Data Wrangling**: Data exploration, tidying, and cleaning decisions using instructor template structure
 - **Statistical Analysis**: T-tests, ANOVA, correlation analysis using broom package
-- **Machine Learning**: Random forest models (91.76% accuracy), feature selection (97.1% accuracy), clustering analysis (3 distinct clusters)
-- **Robustness & Reproducibility**: Multiple approaches, cross-validation, effect sizes
+- **Machine Learning**: Random Forest models (97.5% accuracy), feature selection analysis, clustering analysis (3 distinct clusters)
+- **File Operations**: CSV and RDS file writing with robustness and reproducibility
+- **Instructor Template**: Follows exact template structure with 8 tasks, data tidying, modeling, and file operations
 - **Key Results**: All measurements show highly significant differences between malignant and benign cases
 
 ## Technical Features
@@ -50,9 +53,10 @@ This repository contains my Mini Data Analysis Project for STAT 545A, including 
 ## How to Use This Repository
 
 1. **Milestone 1**: Open `mini-data-analysis1.md` to see the complete exploratory analysis
-2. **Milestone 2**: Open `mini-data-analysis2.Rmd` in RStudio to run the advanced statistical analysis
+2. **Milestone 2**: Open `mini-data-analysis2.md` to see the complete statistical analysis, or `mini-data-analysis2.Rmd` in RStudio to run the code
 3. Check the `mini-data-analysis1_files/figure-gfm/` directory for all plots from Milestone 1
-4. All code should run without errors
+4. Check the `output/` directory for CSV and RDS files from Milestone 2
+5. All code should run without errors
 
 ## Dependencies
 
