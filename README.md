@@ -9,15 +9,23 @@
 
 This repository contains my Mini Data Analysis Project for STAT 545A, including both Milestone 1 and Milestone 2. The analysis explores the `cancer_sample` dataset from the `datateachr` package to understand diagnostic measurements for breast cancer classification using statistical analysis and machine learning techniques.
 
-## Repository Contents
+## Repository Structure
 
-### Main Files
-- `mini-data-analysis1.Rmd` - Milestone 1 source R Markdown document
-- `mini-data-analysis1.md` - Milestone 1 knitted GitHub document output
-- `mini-data-analysis2.Rmd` - Milestone 2 source R Markdown document (instructor template)
-- `mini-data-analysis2.md` - Milestone 2 knitted GitHub document output
-- `mini-data-analysis1_files/` - Directory containing all generated plots from Milestone 1
+### Main Folders
+- `Milestone1/` - Contains all files for Milestone 1
+  - `mini-data-analysis1.Rmd` - Source R Markdown document
+  - `mini-data-analysis1.md` - Knitted GitHub document output
+  - `mini-data-analysis1_files/` - Directory containing all generated plots
+  - `README.md` - Description of Milestone 1 contents
+- `Milestone2/` - Contains all files for Milestone 2
+  - `mini-data-analysis2.Rmd` - Source R Markdown document (instructor template)
+  - `mini-data-analysis2.md` - Knitted GitHub document output
+  - `mini-data-analysis2_files/` - Directory containing all generated plots
+  - `README.md` - Description of Milestone 2 contents
 - `output/` - Directory containing CSV and RDS files from Milestone 2
+  - `radius_summary.csv` - Summary statistics
+  - `rf_model.rds` - Saved Random Forest model
+  - `README.md` - Description of output files
 
 ### Generated Plots
 - `exercise1-diagnosis-distribution-1.png` - Distribution of cancer diagnosis
@@ -52,11 +60,12 @@ This repository contains my Mini Data Analysis Project for STAT 545A, including 
 
 ## How to Use This Repository
 
-1. **Milestone 1**: Open `mini-data-analysis1.md` to see the complete exploratory analysis
-2. **Milestone 2**: Open `mini-data-analysis2.md` to see the complete statistical analysis, or `mini-data-analysis2.Rmd` in RStudio to run the code
-3. Check the `mini-data-analysis1_files/figure-gfm/` directory for all plots from Milestone 1
-4. Check the `output/` directory for CSV and RDS files from Milestone 2
-5. All code should run without errors
+1. **Milestone 1**: Open `Milestone1/mini-data-analysis1.md` to see the complete exploratory analysis
+2. **Milestone 2**: Open `Milestone2/mini-data-analysis2.md` to see the complete statistical analysis, or `Milestone2/mini-data-analysis2.Rmd` in RStudio to run the code
+3. Check the `Milestone1/mini-data-analysis1_files/figure-gfm/` directory for all plots from Milestone 1
+4. Check the `Milestone2/mini-data-analysis2_files/figure-gfm/` directory for all plots from Milestone 2
+5. Check the `output/` directory for CSV and RDS files from Milestone 2
+6. All code should run without errors
 
 ## Dependencies
 
