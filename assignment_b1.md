@@ -1,9 +1,12 @@
 Assignment B1: Making a Function in R
 ================
-Zahra Alipour
+Zahra Alipour (Student Number: 65174591)
 2025-11-04
 
 # Assignment B1: Making a Function in R
+
+**Student:** Zahra Alipour  
+**Student Number:** 65174591
 
 This document contains my submission for Assignment B1, which
 demonstrates creating, documenting, testing, and using a custom R
@@ -86,11 +89,11 @@ summarise_by_group <- function(data, group_var, num_var, na.rm = TRUE) {
       n_non_missing = sum(!is.na({{ num_var }})),
       min = {
         v <- suppressWarnings(min({{ num_var }}, na.rm = na.rm))
-        if (n_non_missing == 0) NA_real_ else v
+        if (is.infinite(v) || sum(!is.na({{ num_var }})) == 0) NA_real_ else v
       },
       max = {
         v <- suppressWarnings(max({{ num_var }}, na.rm = na.rm))
-        if (n_non_missing == 0) NA_real_ else v
+        if (is.infinite(v) || sum(!is.na({{ num_var }})) == 0) NA_real_ else v
       },
       mean = {
         m <- mean({{ num_var }}, na.rm = na.rm)
@@ -119,14 +122,14 @@ summarise_by_group <- function(data, group_var, num_var, na.rm = TRUE) {
 
 2.  **Parameter names**:
 
-    -   `data`: Standard name in tidyverse functions (e.g., `filter()`,
-        `mutate()`)
-    -   `group_var`: Descriptive name indicating this is the grouping
-        variable
-    -   `num_var`: Short for “numerical variable”, clearly indicating
-        the variable to summarize
-    -   `na.rm`: Standard parameter name in R statistical functions
-        (e.g., `mean()`, `sd()`)
+    - `data`: Standard name in tidyverse functions (e.g., `filter()`,
+      `mutate()`)
+    - `group_var`: Descriptive name indicating this is the grouping
+      variable
+    - `num_var`: Short for “numerical variable”, clearly indicating the
+      variable to summarize
+    - `na.rm`: Standard parameter name in R statistical functions (e.g.,
+      `mean()`, `sd()`)
 
 3.  **Flexibility**: The function accepts any data frame and any
     grouping/numerical variable pair, making it flexible for different
@@ -154,7 +157,7 @@ structure - A `@examples` tag showing usage
 Here are several examples demonstrating the usage of
 `summarise_by_group()`:
 
-### Example 1: Basic usage with cancer\_sample dataset
+### Example 1: Basic usage with cancer_sample dataset
 
 ``` r
 # Calculate summary statistics for radius_mean grouped by diagnosis
@@ -297,7 +300,7 @@ test_that("Function works with numeric vector with no NAs", {
 })
 ```
 
-    ## Test passed 😀
+    ## Test passed 🥳
 
 ``` r
 # Test 2: Function handles NAs correctly
@@ -334,7 +337,7 @@ test_that("Function handles NAs correctly", {
 })
 ```
 
-    ## Test passed 😸
+    ## Test passed 🥇
 
 ``` r
 # Test 3: Function works with empty vector (length 0)
@@ -350,7 +353,7 @@ test_that("Function works with empty data frame", {
 })
 ```
 
-    ## Test passed 🌈
+    ## Test passed 🥇
 
 ``` r
 # Test 4: Function returns consistent output structure
@@ -370,7 +373,7 @@ test_that("Function returns consistent output structure", {
 })
 ```
 
-    ## Test passed 😸
+    ## Test passed 🎊
 
 ``` r
 # Test 5: Function provides appropriate error messages
@@ -395,7 +398,7 @@ test_that("Function provides appropriate error messages", {
 })
 ```
 
-    ## Test passed 😸
+    ## Test passed 😀
 
 All tests pass, confirming that the function works correctly across
 different scenarios.

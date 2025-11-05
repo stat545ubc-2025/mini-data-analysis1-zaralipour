@@ -1,6 +1,6 @@
 ---
 title: "Assignment B1: Making a Function in R"
-author: "Zahra Alipour"
+author: "Zahra Alipour (Student Number: 65174591)"
 date: "2025-11-04"
 output: github_document
 ---
@@ -13,6 +13,9 @@ library(datateachr)
 ```
 
 # Assignment B1: Making a Function in R
+
+**Student:** Zahra Alipour  
+**Student Number:** 65174591
 
 This document contains my submission for Assignment B1, which demonstrates creating, documenting, testing, and using a custom R function.
 
@@ -86,11 +89,11 @@ summarise_by_group <- function(data, group_var, num_var, na.rm = TRUE) {
       n_non_missing = sum(!is.na({{ num_var }})),
       min = {
         v <- suppressWarnings(min({{ num_var }}, na.rm = na.rm))
-        if (n_non_missing == 0) NA_real_ else v
+        if (is.infinite(v) || sum(!is.na({{ num_var }})) == 0) NA_real_ else v
       },
       max = {
         v <- suppressWarnings(max({{ num_var }}, na.rm = na.rm))
-        if (n_non_missing == 0) NA_real_ else v
+        if (is.infinite(v) || sum(!is.na({{ num_var }})) == 0) NA_real_ else v
       },
       mean = {
         m <- mean({{ num_var }}, na.rm = na.rm)

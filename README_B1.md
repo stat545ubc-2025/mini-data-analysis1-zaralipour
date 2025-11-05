@@ -1,6 +1,7 @@
 # Assignment B1: Making a Function in R
 
 **Student:** Zahra Alipour  
+**Student Number:** 65174591  
 **Course:** STAT 545B  
 **Assignment:** B1 - Making a Function in R  
 **Date:** November 2025
